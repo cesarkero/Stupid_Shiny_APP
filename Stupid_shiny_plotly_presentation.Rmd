@@ -1,0 +1,100 @@
+---
+title: "Stupid Shiny Presentation for Stupid Shiny APP"
+author: "César Arquero Cabral"
+date: "14 de febrero de 2019"
+output:
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error = F, message = F, tidy=T, warning = F)
+```
+
+## Intructions
+Here you will find easy instructions to use the marvellous **Stupid Shiny APP**.
+
+### Data source
+Each time you call the APP it downloads a bunch of tweets with the function *search_tweets()*. You just need to select a word as a filter, a number of tweets the APP is going to download and apply changes.
+
+### Goals
+The APP contain 3 tabs showing the following:
+1. A boxplot of number of words by source. Something very very useful to be an autentic data analyzer.
+2. A map showing just those tweets geolocated. I mean, as we must know, twitter captures all geolocations, that's for sure, but, data contain just those coords autorized by users...I guess.
+3. A render table of just one column: tweets. 
+Moreover, there is an extra plot comparing the number of followers by group.
+
+## Process 1: libraries and data
+Libraries will be not in **ui.R** or **server.R** but in another file called **Base.R**. The following code allows you to load libraries and install them in case ther are not already installed in the system.
+```{r,  eval=F, echo=T, tidy =TRUE}
+libraries <- c("processx", "devtools", "ROAuth", "jsonlite", "rtweet", "ggplot2",
+               "dplyr", "stringi", "tidytext", "leaflet", "yaml", "digest", "udunits2", 
+               "wordcloud", "wordcloud2", "topicmodels", "ngram", "Rmpfr", "stringr","shinyjs",
+               "base64enc","httpuv", "plotly", "data.table")
+
+lapply(libraries, function (x) {if(x %in% rownames(installed.packages()) == FALSE) {install.packages(x)}})
+lapply(libraries, require,  character.only=T)
+```
+
+## ui.R document
+Here is the code structure for the **ui.R** document that defines *what you see* in this APP.
+```{r, eval=F, echo=T, tidy =TRUE}
+fluidPage(
+    headerPanel("Stupid Shiny APP - Useless word analysis"),
+    sidebarLayout(
+        sidebarPanel(helpText("This is an Stupid shinny app that allows you to make useless 
+                              word analysis from words found in twitter. 
+                              Follow the steps:"),
+                     helpText("(1) Pick a word"),
+                     helpText("(2) Define the number of tweets you want to analyze"),
+                     helpText("(3) Push the button and enjoy the USELESS"),
+                     
+                     textInput(inputId = "UserOrHashtag",
+                               label = "Twitter User or Hashtag:",
+                               value = "Roma"),
+                     sliderInput("Ntweets", "Maximum number of tweets to capture:",
+                                 min=250, max= 5000, value=500, step = 1),
+                     submitButton("Update View", icon = icon("refresh")),
+                     width = 3),
+        mainPanel(
+            tabsetPanel(
+                tabPanel("Boxplot de kk",plotlyOutput("P1")),
+                tabPanel("Miermap",leafletOutput("M1")),
+                tabPanel("Tweets and go home",tableOutput("T1"))
+            ))))
+```
+
+## server.R document
+Here is the code structure for the **ui.R** document that defines *what you see* in this APP.
+Code has been collapsed and reduced (hard to read) in order to fit the slide length. Most of the complete code is based on a previous exercise [Stupid MAP](http://rpubs.com/cesarkero/430537).
+```{r, eval=F, echo=T, tidy =TRUE}
+shinyServer(function (input, output) {
+    tweets <- reactive ({
+        tweets <- search_tweets(q=input$UserOrHashtag,n=input$Ntweets,include_rts = F) #capture tweets based on inputs
+    PLOT1 <- reactive({ # create plot and filter sources before
+        t <- tweets()
+        #...here t must be prepared to be plotted...
+        PLOT1 <- plot_ly(t, y = ~Nwords, type="box", color = ~factor(source))})
+    MAP1 <- reactive({ # create map
+        if (#there is any tweets with coords...) { ## points to be mapped
+            MAP1 <- tweet_coords %>% leaflet(width="100%") %>% addTiles(group="OSM") #simple map
+        } else {
+            #data preparation (based on Stupid_MAP)
+            #MAP
+            MAP1 <- tweet_coords %>% leaflet(width="100%") %>% addTiles(group="OSM") %>%
+                # add base groups, marks, layers, etc
+        }})
+    TABLE1 <- reactive({TABLE1 <- tweets()$text}) # create table
+    #OUTPUTS
+    output$P1 <- renderPlotly({PLOT1()})
+    output$M1 <- renderLeaflet({MAP1()})
+    output$T1 <- renderTable({TABLE1()})
+})
+```
+## Conclusion
+
+
+No brain = No discussion. No discussion = No conclusion.
+
+Have a nice day and don't be stupid.
