@@ -2,6 +2,8 @@
 
 [Link to APP](https://modlearth.shinyapps.io/Stupid_Shiny_APP/)
 
+[Link Pich Presentation of the APP](https://rpubs.com/cesarkero/stupidshinyapppresentation)
+
 [![Stupid Shiny APP](/screenshot/screenshot.png)](https://modlearth.shinyapps.io/Stupid_Shiny_APP/)
 
 ## Intructions
