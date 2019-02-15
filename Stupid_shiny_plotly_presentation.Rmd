@@ -13,7 +13,9 @@ knitr::opts_chunk$set(echo = TRUE, error = F, message = F, tidy=T, warning = F, 
 ```
 
 ## Intructions
-Here you will find easy instructions to use the marvellous **Stupid Shiny APP**.
+Here you will find easy instructions to use the marvellous [**Stupid Shiny APP**](https://modlearth.shinyapps.io/Stupid_Shiny_APP/).
+
+![Stupid Shiny APP](/screenshot/screenshot.jpg)
 
 ### Data source
 Each time you call the APP it downloads a bunch of tweets with the function *search_tweets()*. You just need to select a word as a filter, a number of tweets the APP is going to download and apply changes.
@@ -72,17 +74,10 @@ shinyServer(function (input, output) {
         #create token
         tweets <- search_tweets(q=input$UserOrHashtag,n=input$Ntweets,include_rts = F) #capture tweets based on inputs
     PLOT1 <- reactive({ # create plot and filter sources before
-        t <- tweets()
-        #...here t must be prepared to be plotted...
-        PLOT1 <- plot_ly(t, y = ~Nwords, type="box", color = ~factor(source))})
+        #...here tweets() must be prepared to be plotted...
+        PLOT1 <- plot_ly(tweets(), y = ~Nwords, type="box", color = ~factor(source))})
     MAP1 <- reactive({ # create map
-        if (#there is any tweets with coords...) { ## points to be mapped
-            MAP1 <- tweet_coords %>% leaflet(width="100%") %>% addTiles(group="OSM") #simple map
-        } else {
-            #data preparation (based on Stupid_MAP)
-            #MAP
-            MAP1 <- tweet_coords %>% leaflet(width="100%") %>% addTiles(group="OSM") %>%
-                # add base groups, marks, layers, etc
+        MAP1 <- ##create map
         }})
     TABLE1 <- reactive({TABLE1 <- tweets()$text}) # create table
     #OUTPUTS

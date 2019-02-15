@@ -1,4 +1,8 @@
 # Stupid_Shiny_APP
+
+[Link to APP](https://modlearth.shinyapps.io/Stupid_Shiny_APP/)
+![Stupid Shiny APP](/screenshot/screenshot.jpg)
+
 ## Intructions
 The APP contain 3 tabs showing the following:
 1. A boxplot of number of words by source. Something very very useful to be an autentic data analyzer.

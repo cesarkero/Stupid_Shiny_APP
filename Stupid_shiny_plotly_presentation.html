@@ -99,7 +99,9 @@
 
 <slide class=""><hgroup><h2>Intructions</h2></hgroup><article  id="intructions" class="smaller ">
 
-<p>Here you will find easy instructions to use the marvellous <strong>Stupid Shiny APP</strong>.</p>
+<p>Here you will find easy instructions to use the marvellous <a href='https://modlearth.shinyapps.io/Stupid_Shiny_APP/' title=''><strong>Stupid Shiny APP</strong></a>.</p>
+
+<img src='/screenshot/screenshot.jpg' title='fig:'/><p class='caption'>Stupid Shiny APP</p>
 
 <h3>Data source</h3>
 
@@ -117,19 +119,24 @@
 
 </article></slide><slide class=""><hgroup><h2>Process 1: libraries and data</h2></hgroup><article  id="process-1-libraries-and-data" class="smaller smaller">
 
-<p>Libraries will be not in <strong>ui.R</strong> or <strong>server.R</strong> but in another file called <strong>Base.R</strong>. The following code allows you to load libraries and install them in case ther are not already installed in the system.</p>
+<p>Libraries will be at the start of <strong>ui.R</strong>.</p>
 
-<pre class = 'prettyprint lang-r'>libraries &lt;- c(&quot;processx&quot;, &quot;devtools&quot;, &quot;ROAuth&quot;, &quot;jsonlite&quot;, &quot;rtweet&quot;, &quot;ggplot2&quot;, 
-    &quot;dplyr&quot;, &quot;stringi&quot;, &quot;tidytext&quot;, &quot;leaflet&quot;, &quot;yaml&quot;, &quot;digest&quot;, &quot;udunits2&quot;, 
-    &quot;wordcloud&quot;, &quot;wordcloud2&quot;, &quot;topicmodels&quot;, &quot;ngram&quot;, &quot;Rmpfr&quot;, &quot;stringr&quot;, &quot;shinyjs&quot;, 
-    &quot;base64enc&quot;, &quot;httpuv&quot;, &quot;plotly&quot;, &quot;data.table&quot;)
-
-lapply(libraries, function(x) {
-    if (x %in% rownames(installed.packages()) == FALSE) {
-        install.packages(x)
-    }
-})
-lapply(libraries, require, character.only = T)</pre>
+<pre class = 'prettyprint lang-r'>library(devtools)
+library(jsonlite)
+library(rtweet)
+library(ggplot2)
+library(dplyr)
+library(stringi)
+library(tidytext)
+library(leaflet)
+library(yaml)
+library(stringr)
+library(shinyjs)
+library(base64enc)
+library(httpuv)
+library(plotly)
+library(data.table)
+library(shiny)</pre>
 
 </article></slide><slide class=""><hgroup><h2>ui.R</h2></hgroup><article  id="ui.r" class="smaller smaller">
 
@@ -165,19 +172,13 @@ lapply(libraries, require, character.only = T)</pre>
 
 <pre class = 'prettyprint lang-r'>shinyServer(function (input, output) {
     tweets &lt;- reactive ({
+        #create token
         tweets &lt;- search_tweets(q=input$UserOrHashtag,n=input$Ntweets,include_rts = F) #capture tweets based on inputs
     PLOT1 &lt;- reactive({ # create plot and filter sources before
-        t &lt;- tweets()
-        #...here t must be prepared to be plotted...
-        PLOT1 &lt;- plot_ly(t, y = ~Nwords, type=&quot;box&quot;, color = ~factor(source))})
+        #...here tweets() must be prepared to be plotted...
+        PLOT1 &lt;- plot_ly(tweets(), y = ~Nwords, type=&quot;box&quot;, color = ~factor(source))})
     MAP1 &lt;- reactive({ # create map
-        if (#there is any tweets with coords...) { ## points to be mapped
-            MAP1 &lt;- tweet_coords %&gt;% leaflet(width=&quot;100%&quot;) %&gt;% addTiles(group=&quot;OSM&quot;) #simple map
-        } else {
-            #data preparation (based on Stupid_MAP)
-            #MAP
-            MAP1 &lt;- tweet_coords %&gt;% leaflet(width=&quot;100%&quot;) %&gt;% addTiles(group=&quot;OSM&quot;) %&gt;%
-                # add base groups, marks, layers, etc
+        MAP1 &lt;- ##create map
         }})
     TABLE1 &lt;- reactive({TABLE1 &lt;- tweets()$text}) # create table
     #OUTPUTS
