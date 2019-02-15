@@ -4,6 +4,7 @@ author: "César Arquero Cabral"
 date: "14 de febrero de 2019"
 output:
   ioslides_presentation:
+    logo: screenshot/screenshot.png
     widescreen: true
     smaller: true
 ---
@@ -15,12 +16,14 @@ knitr::opts_chunk$set(echo = TRUE, error = F, message = F, tidy=T, warning = F, 
 ## Intructions
 Here you will find easy instructions to use the marvellous [**Stupid Shiny APP**](https://modlearth.shinyapps.io/Stupid_Shiny_APP/).
 
-![Stupid Shiny APP](/screenshot/screenshot.jpg)
+```{r, echo = F, out.width='50%', fig.align='center', fig.cap='[**Stupid Shiny APP**](https://modlearth.shinyapps.io/Stupid_Shiny_APP/)'}
+knitr::include_graphics('screenshot/screenshot.png')
+```
 
 ### Data source
 Each time you call the APP it downloads a bunch of tweets with the function *search_tweets()*. You just need to select a word as a filter, a number of tweets the APP is going to download and apply changes.
 
-### Goals
+## Goals and libraries
 The APP contain 3 tabs showing the following:
 
 1. A boxplot of number of words by source. Something very very useful to be an autentic data analyzer.
@@ -28,14 +31,9 @@ The APP contain 3 tabs showing the following:
 3. A render table of just one column: tweets. 
 Moreover, there is an extra plot comparing the number of followers by group.
 
-## Process 1: libraries and data {.smaller}
-Libraries will be at the start of **ui.R**.
-```{r, eval=F, echo=T, tidy =TRUE, size = 'tiny'}
-library(devtools); library(jsonlite); library(rtweet); library(ggplot2); library(dplyr)
-library(stringi); library(tidytext); library(leaflet); library(yaml); library(stringr)
-library(shinyjs); library(base64enc); library(httpuv); library(plotly); library(data.table)
-library(shiny)
-```
+### Libraries
+Libraries will be at the start of **ui.R** : library(devtools); library(jsonlite); library(rtweet); library(ggplot2); library(dplyr)
+library(stringi); library(tidytext); library(leaflet); library(yaml); library(stringr); library(shinyjs); library(base64enc); library(httpuv); library(plotly); library(data.table); library(shiny)
 
 ## ui.R {.smaller}
 Here is the code structure for the **ui.R** document that defines *what you see* in this APP.
@@ -43,9 +41,7 @@ Here is the code structure for the **ui.R** document that defines *what you see*
 fluidPage(
     headerPanel("Stupid Shiny APP - Useless word analysis"),
     sidebarLayout(
-        sidebarPanel(helpText("This is an Stupid shinny app that allows you to make useless 
-                              word analysis from words found in twitter. 
-                              Follow the steps:"),
+        sidebarPanel(helpText("bla bla bla"),
                      helpText("(1) Pick a word"),
                      helpText("(2) Define the number of tweets you want to analyze"),
                      helpText("(3) Push the button and enjoy the USELESS"),
