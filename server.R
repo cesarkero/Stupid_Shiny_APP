@@ -1,11 +1,18 @@
-source("Base.R")
-
 shinyServer(function (input, output) {
 
     tweets <- reactive ({
+        #CREATE TOKEN
+        appname <- "Stupid_MAP" ## name of the app
+        a <- "api key" ## api key
+        b <- "api secret" ## api secret
+        c <- "access_token" ## access_token
+        d <- "access_secret" ## access_secret
+        token <- create_token(appname, a, b, c, d)
+
         tweets <- search_tweets(q=input$UserOrHashtag,
                                 n=input$Ntweets,
-                                include_rts = F)
+                                include_rts = F,
+                                token=token)
         
         #create a table from twitter data
         tweets <- as.data.frame(tweets)

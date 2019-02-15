@@ -9,7 +9,6 @@ Moreover, there is an extra plot comparing the number of followers by group.
 Each time you call the APP it downloads a bunch of tweets with the function *search_tweets()*. You just need to select a word as a filter, a number of tweets the APP is going to download and apply changes.
 
 ### Elements:
-0. Base.R --> load and install libraries
 1. ui.R --> how APP shows
 2. server.R --> what APP does
 3. Stupid_shiny_plotly_presentation --> slides as resume of the APP

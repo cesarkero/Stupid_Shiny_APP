@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, error = F, message = F, tidy=T, warning = F)
+knitr::opts_chunk$set(echo = TRUE, error = F, message = F, tidy=T, warning = F, size = 'tiny')
 ```
 
 ## Intructions
@@ -20,26 +20,24 @@ Each time you call the APP it downloads a bunch of tweets with the function *sea
 
 ### Goals
 The APP contain 3 tabs showing the following:
+
 1. A boxplot of number of words by source. Something very very useful to be an autentic data analyzer.
 2. A map showing just those tweets geolocated. I mean, as we must know, twitter captures all geolocations, that's for sure, but, data contain just those coords autorized by users...I guess.
 3. A render table of just one column: tweets. 
 Moreover, there is an extra plot comparing the number of followers by group.
 
-## Process 1: libraries and data
-Libraries will be not in **ui.R** or **server.R** but in another file called **Base.R**. The following code allows you to load libraries and install them in case ther are not already installed in the system.
-```{r,  eval=F, echo=T, tidy =TRUE}
-libraries <- c("processx", "devtools", "ROAuth", "jsonlite", "rtweet", "ggplot2",
-               "dplyr", "stringi", "tidytext", "leaflet", "yaml", "digest", "udunits2", 
-               "wordcloud", "wordcloud2", "topicmodels", "ngram", "Rmpfr", "stringr","shinyjs",
-               "base64enc","httpuv", "plotly", "data.table")
-
-lapply(libraries, function (x) {if(x %in% rownames(installed.packages()) == FALSE) {install.packages(x)}})
-lapply(libraries, require,  character.only=T)
+## Process 1: libraries and data {.smaller}
+Libraries will be at the start of **ui.R**.
+```{r, eval=F, echo=T, tidy =TRUE, size = 'tiny'}
+library(devtools); library(jsonlite); library(rtweet); library(ggplot2); library(dplyr)
+library(stringi); library(tidytext); library(leaflet); library(yaml); library(stringr)
+library(shinyjs); library(base64enc); library(httpuv); library(plotly); library(data.table)
+library(shiny)
 ```
 
-## ui.R document
+## ui.R {.smaller}
 Here is the code structure for the **ui.R** document that defines *what you see* in this APP.
-```{r, eval=F, echo=T, tidy =TRUE}
+```{r, eval=F, echo=T, tidy =TRUE, size = 'tiny'}
 fluidPage(
     headerPanel("Stupid Shiny APP - Useless word analysis"),
     sidebarLayout(
@@ -65,12 +63,13 @@ fluidPage(
             ))))
 ```
 
-## server.R document
+## server.R {.smaller}
 Here is the code structure for the **ui.R** document that defines *what you see* in this APP.
 Code has been collapsed and reduced (hard to read) in order to fit the slide length. Most of the complete code is based on a previous exercise [Stupid MAP](http://rpubs.com/cesarkero/430537).
 ```{r, eval=F, echo=T, tidy =TRUE}
 shinyServer(function (input, output) {
     tweets <- reactive ({
+        #create token
         tweets <- search_tweets(q=input$UserOrHashtag,n=input$Ntweets,include_rts = F) #capture tweets based on inputs
     PLOT1 <- reactive({ # create plot and filter sources before
         t <- tweets()
@@ -92,9 +91,3 @@ shinyServer(function (input, output) {
     output$T1 <- renderTable({TABLE1()})
 })
 ```
-## Conclusion
-
-
-No brain = No discussion. No discussion = No conclusion.
-
-Have a nice day and don't be stupid.

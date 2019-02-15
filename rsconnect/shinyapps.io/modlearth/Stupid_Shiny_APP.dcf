@@ -1,0 +1,13 @@
+name: Stupid_Shiny_APP
+title: Stupid_Shiny_APP
+username:
+account: modlearth
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 719156
+bundleId: 1878483
+url: https://modlearth.shinyapps.io/Stupid_Shiny_APP/
+when: 1550249634.68933
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .gitattributes

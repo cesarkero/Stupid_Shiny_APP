@@ -107,9 +107,15 @@
 
 <h3>Goals</h3>
 
-<p>The APP contain 3 tabs showing the following: 1. A boxplot of number of words by source. Something very very useful to be an autentic data analyzer. 2. A map showing just those tweets geolocated. I mean, as we must know, twitter captures all geolocations, that&#39;s for sure, but, data contain just those coords autorized by users&#8230;I guess. 3. A render table of just one column: tweets. Moreover, there is an extra plot comparing the number of followers by group.</p>
+<p>The APP contain 3 tabs showing the following:</p>
 
-</article></slide><slide class=""><hgroup><h2>Process 1: libraries and data</h2></hgroup><article  id="process-1-libraries-and-data" class="smaller ">
+<ol>
+<li>A boxplot of number of words by source. Something very very useful to be an autentic data analyzer.</li>
+<li>A map showing just those tweets geolocated. I mean, as we must know, twitter captures all geolocations, that&#39;s for sure, but, data contain just those coords autorized by users&#8230;I guess.</li>
+<li>A render table of just one column: tweets. Moreover, there is an extra plot comparing the number of followers by group.</li>
+</ol>
+
+</article></slide><slide class=""><hgroup><h2>Process 1: libraries and data</h2></hgroup><article  id="process-1-libraries-and-data" class="smaller smaller">
 
 <p>Libraries will be not in <strong>ui.R</strong> or <strong>server.R</strong> but in another file called <strong>Base.R</strong>. The following code allows you to load libraries and install them in case ther are not already installed in the system.</p>
 
@@ -125,7 +131,7 @@ lapply(libraries, function(x) {
 })
 lapply(libraries, require, character.only = T)</pre>
 
-</article></slide><slide class=""><hgroup><h2>ui.R document</h2></hgroup><article  id="ui.r-document" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>ui.R</h2></hgroup><article  id="ui.r" class="smaller smaller">
 
 <p>Here is the code structure for the <strong>ui.R</strong> document that defines <em>what you see</em> in this APP.</p>
 
@@ -153,7 +159,7 @@ lapply(libraries, require, character.only = T)</pre>
                 tabPanel(&quot;Tweets and go home&quot;,tableOutput(&quot;T1&quot;))
             ))))</pre>
 
-</article></slide><slide class=""><hgroup><h2>server.R document</h2></hgroup><article  id="server.r-document" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>server.R</h2></hgroup><article  id="server.r" class="smaller smaller">
 
 <p>Here is the code structure for the <strong>ui.R</strong> document that defines <em>what you see</em> in this APP. Code has been collapsed and reduced (hard to read) in order to fit the slide length. Most of the complete code is based on a previous exercise <a href='http://rpubs.com/cesarkero/430537' title=''>Stupid MAP</a>.</p>
 
@@ -178,13 +184,7 @@ lapply(libraries, require, character.only = T)</pre>
     output$P1 &lt;- renderPlotly({PLOT1()})
     output$M1 &lt;- renderLeaflet({MAP1()})
     output$T1 &lt;- renderTable({TABLE1()})
-})</pre>
-
-</article></slide><slide class=""><hgroup><h2>Conclusion</h2></hgroup><article  id="conclusion" class="smaller ">
-
-<p>No brain = No discussion. No discussion = No conclusion.</p>
-
-<p>Have a nice day and don&#39;t be stupid.</p></article></slide>
+})</pre></article></slide>
 
 
   <slide class="backdrop"></slide>

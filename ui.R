@@ -1,4 +1,7 @@
-source("Base.R")
+library(devtools); library(jsonlite); library(rtweet); library(ggplot2); library(dplyr)
+library(stringi); library(tidytext); library(leaflet); library(yaml); library(stringr)
+library(shinyjs); library(base64enc); library(httpuv); library(plotly); library(data.table)
+library(shiny)
 
 fluidPage(
     
