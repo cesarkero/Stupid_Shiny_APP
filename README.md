@@ -2,7 +2,7 @@
 
 [Link to APP](https://modlearth.shinyapps.io/Stupid_Shiny_APP/)
 
-![Stupid Shiny APP](/screenshot/screenshot.jpg)
+![Stupid Shiny APP](/screenshot/screenshot.png)
 
 ## Intructions
 The APP contain 3 tabs showing the following:
